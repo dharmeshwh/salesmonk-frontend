@@ -7,9 +7,15 @@ import { Button } from "@nextui-org/button";
 import { Select, SelectItem } from "@nextui-org/react";
 import { API_URLS, baseApi } from "../utils/axios";
 
-export const ReviewModal = ({ isVisible, setIsVisible }: any) => {
+export const ReviewModal = ({
+  isVisible,
+  setIsVisible,
+  getMovies,
+  getReviews,
+}: any) => {
   const [movies, setMovies] = React.useState([]);
   const [review, setReview] = React.useState({});
+  const [loading, setLoading] = React.useState(false);
 
   const handleGetMovies = async () => {
     try {
@@ -31,9 +37,13 @@ export const ReviewModal = ({ isVisible, setIsVisible }: any) => {
 
   const handleAddReview = async () => {
     try {
+      setLoading(true);
       await baseApi.post(API_URLS.CREATE_REVIEW, review);
     } catch (error) {
     } finally {
+      getMovies && getMovies();
+      getReviews && getReviews();
+      setLoading(false);
       setIsVisible(false);
     }
   };
@@ -44,7 +54,7 @@ export const ReviewModal = ({ isVisible, setIsVisible }: any) => {
 
   return (
     <>
-      <Modal isOpen={isVisible}>
+      <Modal isOpen={isVisible} onOpenChange={() => setIsVisible(false)}>
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">
             Add new review
@@ -83,6 +93,7 @@ export const ReviewModal = ({ isVisible, setIsVisible }: any) => {
               onChange={handleChange}
             ></textarea>
             <Button
+              isLoading={loading}
               onClick={handleAddReview}
               className="mb-10"
               color="secondary"

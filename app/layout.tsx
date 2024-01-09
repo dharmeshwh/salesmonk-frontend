@@ -39,7 +39,7 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             {children}
-            <footer className="w-full flex items-center justify-between py-3 p-6">
+            <footer className="w-full flex items-center justify-between py-3 p-6 bg-gray-200">
               <p>Copyright {new Date().getFullYear()}</p>
               <p>Follow us on Instagram</p>
             </footer>

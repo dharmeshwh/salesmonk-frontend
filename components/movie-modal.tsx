@@ -6,11 +6,12 @@ import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/button";
 import { API_URLS, baseApi } from "../utils/axios";
 
-export const MovieModal = ({ isOpen, setOpen, getMovies }: any) => {
+export const MovieModal = ({ isOpen, setOpen, getMovies, getReviews }: any) => {
   const [movie, setMovie] = React.useState({
     name: "",
     releaseDate: "",
   });
+  const [loading, setLoading] = React.useState(false);
 
   const handleChange = (event: any) => {
     const { name, value } = event.target;
@@ -22,17 +23,20 @@ export const MovieModal = ({ isOpen, setOpen, getMovies }: any) => {
 
   const handleAddMovie = async () => {
     try {
+      setLoading(true);
       await baseApi.post(API_URLS.CREATE_MOVIES, movie);
     } catch (error) {
     } finally {
-      getMovies();
+      getMovies && getMovies();
+      getReviews && getReviews();
+      setLoading(false);
       setOpen(false);
     }
   };
 
   return (
     <>
-      <Modal isOpen={isOpen} onClose={() => setOpen(false)}>
+      <Modal isOpen={isOpen} onOpenChange={() => setOpen(false)}>
         <ModalContent>
           <ModalHeader className="flex flex-col gap-1">Add Movie</ModalHeader>
           <ModalBody className="flex flex-col gap-8">
@@ -66,6 +70,7 @@ export const MovieModal = ({ isOpen, setOpen, getMovies }: any) => {
               onClick={handleAddMovie}
               className="mb-10"
               color="secondary"
+              isLoading={loading}
             >
               Create movie
             </Button>

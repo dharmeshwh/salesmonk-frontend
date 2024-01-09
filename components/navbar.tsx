@@ -9,12 +9,11 @@ import {
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
 import NextLink from "next/link";
-import { ThemeSwitch } from "@/components/theme-switch";
 import { MovieModal } from "./movie-modal";
 import React from "react";
 import { ReviewModal } from "./review-modal";
 
-export const Navbar = ({ getMovies }: any) => {
+export const Navbar = ({ getMovies, getReviews }: any) => {
   const [showMovieModel, setShowMovieModal] = React.useState(false);
   const [showReviewModal, setShowReviewModal] = React.useState(false);
 
@@ -24,12 +23,15 @@ export const Navbar = ({ getMovies }: any) => {
         isOpen={showMovieModel}
         setOpen={setShowMovieModal}
         getMovies={getMovies}
+        getReviews={getReviews}
       />
       <ReviewModal
         isVisible={showReviewModal}
         setIsVisible={setShowReviewModal}
+        getReviews={getReviews}
+        getMovies={getMovies}
       />
-      <NextUINavbar isBlurred maxWidth="xl" position="sticky">
+      <NextUINavbar className="bg-gray-200" maxWidth="xl" position="sticky">
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
             <NextLink
@@ -45,9 +47,7 @@ export const Navbar = ({ getMovies }: any) => {
           className="hidden sm:flex basis-1/5 sm:basis-full"
           justify="end"
         >
-          <NavbarItem className="hidden sm:flex gap-2">
-            <ThemeSwitch />
-          </NavbarItem>
+          <NavbarItem className="hidden sm:flex gap-2"></NavbarItem>
           <NavbarItem className="hidden md:flex gap-3">
             <Button
               onClick={() => setShowMovieModal(true)}
@@ -63,7 +63,6 @@ export const Navbar = ({ getMovies }: any) => {
         </NavbarContent>
 
         <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-          <ThemeSwitch />
           <NavbarMenuToggle />
         </NavbarContent>
       </NextUINavbar>
