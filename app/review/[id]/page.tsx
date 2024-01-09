@@ -30,7 +30,7 @@ export default function ReviewPage({ params }: { params: { id: string } }) {
 
   return (
     <>
-      <Navbar />
+      <Navbar fetchReviews={fetchReviews} />
       {loading && <Loader />}
       {!loading && (
         <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow ">

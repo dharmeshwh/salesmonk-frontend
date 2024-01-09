@@ -13,7 +13,7 @@ import { MovieModal } from "./movie-modal";
 import React from "react";
 import { ReviewModal } from "./review-modal";
 
-export const Navbar = ({ getMovies, getReviews }: any) => {
+export const Navbar = ({ getMovies, fetchReviews }: any) => {
   const [showMovieModel, setShowMovieModal] = React.useState(false);
   const [showReviewModal, setShowReviewModal] = React.useState(false);
 
@@ -23,12 +23,12 @@ export const Navbar = ({ getMovies, getReviews }: any) => {
         isOpen={showMovieModel}
         setOpen={setShowMovieModal}
         getMovies={getMovies}
-        getReviews={getReviews}
+        getReviews={fetchReviews}
       />
       <ReviewModal
         isVisible={showReviewModal}
         setIsVisible={setShowReviewModal}
-        getReviews={getReviews}
+        getReviews={fetchReviews}
         getMovies={getMovies}
       />
       <NextUINavbar className="bg-gray-200" maxWidth="xl" position="sticky">
