@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: "(prefers-color-scheme: white)", color: "white" },
   ],
   icons: {
     icon: "/favicon.ico",
@@ -36,7 +36,7 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "white" }}>
           <div className="relative flex flex-col h-screen">
             {children}
             <footer className="w-full flex items-center justify-between py-3 p-6 bg-gray-200">
