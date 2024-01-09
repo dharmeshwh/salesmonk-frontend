@@ -1,4 +1,8 @@
-export const MovieBox = () => {
+"use client";
+
+import dayjs from "dayjs";
+
+export const MovieBox = ({ name, releasedDate, averageRating }: any) => {
   return (
     <>
       <div
@@ -7,9 +11,9 @@ export const MovieBox = () => {
           height: "8rem",
         }}
       >
-        <p className="text-xl font-semibold">Start wars</p>
-        <p className="italic">Released: 5 March 2023</p>
-        <p className="text-l font-extrabold">Rating: 9/10</p>
+        <p className="text-xl font-semibold">{name}</p>
+        <p className="italic">Released: {dayjs(releasedDate).format('D MMMM YYYY')}</p>
+        <p className="text-l font-extrabold">Rating: {averageRating}/10</p>
       </div>
     </>
   );

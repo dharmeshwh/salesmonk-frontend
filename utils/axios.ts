@@ -6,4 +6,6 @@ export const baseApi = axios.create({
 
 export const API_URLS = {
   GET_MOVIES: "/movies",
+  CREATE_MOVIES: "/movies",
+  GET_REVIEWS: "/reviews",
 };
