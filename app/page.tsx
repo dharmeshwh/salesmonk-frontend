@@ -12,7 +12,6 @@ export default function Home() {
   const [movies, setMovies] = React.useState<any[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [search, setSearch] = React.useState("");
-  const [debouncedValue, setDebouncedValue] = React.useState<string>("");
 
   const handleGetMovies = async () => {
     try {
@@ -28,14 +27,23 @@ export default function Home() {
     }
   };
 
-  const searchMovies = async () => {
+  const searchMovies = React.useCallback(async (q: string) => {
     try {
       const {
         data: { data },
-      } = await baseApi.get(`${API_URLS.SEARCH_MOVIES}?search=${search}`);
+      } = await baseApi.get(`${API_URLS.SEARCH_MOVIES}?search=${q}`);
+      setMovies(data);
     } catch (error) {}
-  };
+  }, []);
 
+  React.useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      searchMovies(search);
+    }, 500);
+
+    // Cleanup function to clear the timeout when the component unmounts or when query changes
+    return () => clearTimeout(debounceTimer);
+  }, [search, searchMovies]);
 
   React.useEffect(() => {
     handleGetMovies();
