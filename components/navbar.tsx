@@ -12,9 +12,11 @@ import NextLink from "next/link";
 import { ThemeSwitch } from "@/components/theme-switch";
 import { MovieModal } from "./movie-modal";
 import React from "react";
+import { ReviewModal } from "./review-modal";
 
 export const Navbar = ({ getMovies }: any) => {
   const [showMovieModel, setShowMovieModal] = React.useState(false);
+  const [showReviewModal, setShowReviewModal] = React.useState(false);
 
   return (
     <>
@@ -22,6 +24,10 @@ export const Navbar = ({ getMovies }: any) => {
         isOpen={showMovieModel}
         setOpen={setShowMovieModal}
         getMovies={getMovies}
+      />
+      <ReviewModal
+        isVisible={showReviewModal}
+        setIsVisible={setShowReviewModal}
       />
       <NextUINavbar isBlurred maxWidth="xl" position="sticky">
         <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -50,7 +56,9 @@ export const Navbar = ({ getMovies }: any) => {
             >
               Add new movie
             </Button>
-            <Button color="secondary">Add new review</Button>
+            <Button onClick={() => setShowReviewModal(true)} color="secondary">
+              Add new review
+            </Button>
           </NavbarItem>
         </NavbarContent>
 

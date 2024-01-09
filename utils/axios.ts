@@ -8,4 +8,5 @@ export const API_URLS = {
   GET_MOVIES: "/movies",
   CREATE_MOVIES: "/movies",
   GET_REVIEWS: "/reviews",
+  CREATE_REVIEW: "/reviews",
 };
